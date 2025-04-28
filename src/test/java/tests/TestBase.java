@@ -5,6 +5,12 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class TestBase {
 
+//
+//    String userName = "Alex";
+//    String lastName = "Egorov";
+//    String userEmail = "alex@gmail.com";
+
+
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
