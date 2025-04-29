@@ -46,4 +46,12 @@ public class RandomUtils {
         return ThreadLocalRandom.current().nextDouble(min, max + 1);
     }
 
+
+//    //Faker сделать отдлеьно
+//    public static String getRandomName() {
+//       Faker new faker.name().firstName();
+//
+//    }
+
+
 }

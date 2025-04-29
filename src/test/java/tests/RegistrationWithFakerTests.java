@@ -1,35 +1,46 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
+import java.util.Locale;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static tests.TestData.*;
-import static utils.RandomUtils.*;
+import static utils.RandomUtils.getRandomEmail;
+import static utils.RandomUtils.getRandomString;
 
-public class RegistrationWithRandomUtilsTests extends TestBase {
+public class RegistrationWithFakerTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
 
     @Test
     void successfulRegistrationTest() {
+        Faker faker = new Faker(new Locale("it"));
 
 
-        String[] genders = {"Male", "Female", "Other"};
+//        String firstName = faker.name().firstName(); // Emory
+//        String lastName = faker.name().lastName(); // Barton
+
+
 //        // Подход №1 хранение тестовых данных в переменных
-        String userName = getRandomString(10);
-        String lastName = getRandomString(10);
-        String userEmail = getRandomEmail();
-        String gender = getRandomItemFromArray(genders);
+        String userName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+
+//        String phoneNumber = faker.phoneNumber().phoneNumber();
+        String phoneNumber = "1234567890";
+        String currentAddress = faker.address().fullAddress();
+
 
         registrationPage.openPage()
                 .setFirstName(userName)
                 .setLastName(lastName)
                 .setEmail(userEmail)
-                .setGender(gender)
-                .setPhone("9777237756")
-                .setAddress("Another address 2")
+                .setGender("Other")
+                .setPhone(phoneNumber)
+                .setAddress(currentAddress)
                 .setBirthDate("30", "July", "1994");
 
         //Input with autocomplete
@@ -56,9 +67,10 @@ public class RegistrationWithRandomUtilsTests extends TestBase {
         registrationPage.verifyResultsModalAppears();
         registrationPage.verifyResult("Student Name", userName + " " + lastName);
         registrationPage.verifyResult("Student Email", userEmail);
-        registrationPage.verifyResult("Gender", gender);
-        registrationPage.verifyResult("Mobile", "9777237756");
+        registrationPage.verifyResult("Gender", "Other");
+        registrationPage.verifyResult("Mobile", phoneNumber);
         registrationPage.verifyResult("Date of Birth", "30 July,1994");
+        registrationPage.verifyResult("Address", currentAddress);
     }
 
 
