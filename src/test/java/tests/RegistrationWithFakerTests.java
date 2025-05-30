@@ -29,10 +29,11 @@ public class RegistrationWithFakerTests extends TestBase {
         String lastName = faker.name().lastName();
         String userEmail = faker.internet().emailAddress();
 
-//        String phoneNumber = faker.phoneNumber().phoneNumber();
-        String phoneNumber = "1234567890";
-        String currentAddress = faker.address().fullAddress();
+//        String phoneNumberFake = faker.phoneNumber().phoneNumber();
+//        String phoneNumber = "1234567890";
+        String phoneNumber = "8" + faker.number().digits(9);
 
+        String currentAddress = faker.address().fullAddress();
 
         registrationPage.openPage()
                 .setFirstName(userName)
