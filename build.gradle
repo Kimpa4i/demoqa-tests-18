@@ -32,7 +32,8 @@ dependencies {
             "com.codeborne:selenide:7.9.1",
             "com.github.javafaker:javafaker:1.0.2",
             'org.slf4j:slf4j-simple:2.0.6',
-            'org.seleniumhq.selenium:selenium-java:4.33.0'
+            'org.seleniumhq.selenium:selenium-java:4.33.0',
+            'io.qameta.allure:allure-selenide:2.29.1'
     )
 
 }
