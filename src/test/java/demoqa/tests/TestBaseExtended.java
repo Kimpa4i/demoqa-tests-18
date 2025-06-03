@@ -1,9 +1,8 @@
-package tests;
+package demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import demoqa.helpers.Attach;
-import pages.RegistrationPage;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;

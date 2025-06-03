@@ -1,12 +1,11 @@
-package tests;
+package demoqa.tests;
 
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
+import demoqa.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static tests.TestData.*;
-import static utils.RandomUtils.*;
+import static demoqa.utils.RandomUtils.*;
 
 public class RegistrationWithRandomUtilsTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();

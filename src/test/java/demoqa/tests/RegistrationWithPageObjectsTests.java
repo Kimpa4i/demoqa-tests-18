@@ -1,47 +1,25 @@
-package tests;
+package demoqa.tests;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
-
-import java.util.Locale;
+import demoqa.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static utils.RandomUtils.getRandomEmail;
-import static utils.RandomUtils.getRandomString;
 
-public class RegistrationWithFakerTests extends TestBase {
+public class RegistrationWithPageObjectsTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
-
 
     @Test
     void successfulRegistrationTest() {
-        Faker faker = new Faker(new Locale("it"));
-
-
-//        String firstName = faker.name().firstName(); // Emory
-//        String lastName = faker.name().lastName(); // Barton
-
-
-//        // Подход №1 хранение тестовых данных в переменных
-        String userName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String userEmail = faker.internet().emailAddress();
-
-//        String phoneNumberFake = faker.phoneNumber().phoneNumber();
-//        String phoneNumber = "1234567890";
-        String phoneNumber = "8" + faker.number().digits(9);
-
-        String currentAddress = faker.address().fullAddress();
+        String userName = "Alex";
 
         registrationPage.openPage()
                 .setFirstName(userName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
+                .setLastName("Egorov")
+                .setEmail("alex@mail.ru")
                 .setGender("Other")
-                .setPhone(phoneNumber)
-                .setAddress(currentAddress)
+                .setPhone("9777237756")
+                .setAddress("Another address 2")
                 .setBirthDate("30", "July", "1994");
 
         //Input with autocomplete
@@ -66,12 +44,11 @@ public class RegistrationWithFakerTests extends TestBase {
 //        registrationPage.registrationResultsModal.verifyResult ("Student Name", userName + "Egorov"); // Если в RegistrationPage  сделать     RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal() публичным то можно напрямую обратиться  (Плохая практика);
 
         registrationPage.verifyResultsModalAppears();
-        registrationPage.verifyResult("Student Name", userName + " " + lastName);
-        registrationPage.verifyResult("Student Email", userEmail);
+        registrationPage.verifyResult("Student Name", userName + " Egorov");
+        registrationPage.verifyResult("Student Email", "alex@mail.ru");
         registrationPage.verifyResult("Gender", "Other");
-        registrationPage.verifyResult("Mobile", phoneNumber);
+        registrationPage.verifyResult("Mobile", "9777237756");
         registrationPage.verifyResult("Date of Birth", "30 July,1994");
-        registrationPage.verifyResult("Address", currentAddress);
     }
 
 

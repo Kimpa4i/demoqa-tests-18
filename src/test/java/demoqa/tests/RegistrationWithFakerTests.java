@@ -1,54 +1,45 @@
-package tests;
+package demoqa.tests;
 
-import org.junit.jupiter.api.BeforeEach;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
+import demoqa.pages.RegistrationPage;
+
+import java.util.Locale;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static tests.TestData.*;
 
-public class RegistrationWithTestDataTests extends TestBase {
+public class RegistrationWithFakerTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
-
-//    // Подход №1 хранение тестовых данных в переменных
-//    String userName = "Alex";
-//    String lastName = "Egorov";
-//    String userEmail = "alex@gmail.com";
-
-    // Можно в Testbase хранить, но не лучший подход.
-    //  Можно создать отдельный класс
-
-    //Данные можно вывезти в beforeEach объявив сначала переменные
-
-//    String userName;
-//    String lastName;
-//    String userEmail;
-//
-//    @BeforeEach
-//    void prepareTestData() {
-//        userName = "Alex";
-//        lastName = "Egorov";
-//        userEmail = "alex@gmail.com";
-//
-//    }
 
 
     @Test
     void successfulRegistrationTest() {
-//        // Подход №1 хранение тестовых данных в переменных
-//        String userName = "Alex";
-//        String lastName = "Egorov";
-//        String email = "alex@gmail.com";
+        Faker faker = new Faker(new Locale("it"));
 
+
+//        String firstName = faker.name().firstName(); // Emory
+//        String lastName = faker.name().lastName(); // Barton
+
+
+//        // Подход №1 хранение тестовых данных в переменных
+        String userName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+
+//        String phoneNumberFake = faker.phoneNumber().phoneNumber();
+//        String phoneNumber = "1234567890";
+        String phoneNumber = "8" + faker.number().digits(9);
+
+        String currentAddress = faker.address().fullAddress();
 
         registrationPage.openPage()
                 .setFirstName(userName)
                 .setLastName(lastName)
                 .setEmail(userEmail)
                 .setGender("Other")
-                .setPhone("9777237756")
-                .setAddress("Another address 2")
+                .setPhone(phoneNumber)
+                .setAddress(currentAddress)
                 .setBirthDate("30", "July", "1994");
 
         //Input with autocomplete
@@ -76,8 +67,9 @@ public class RegistrationWithTestDataTests extends TestBase {
         registrationPage.verifyResult("Student Name", userName + " " + lastName);
         registrationPage.verifyResult("Student Email", userEmail);
         registrationPage.verifyResult("Gender", "Other");
-        registrationPage.verifyResult("Mobile", "9777237756");
+        registrationPage.verifyResult("Mobile", phoneNumber);
         registrationPage.verifyResult("Date of Birth", "30 July,1994");
+        registrationPage.verifyResult("Address", currentAddress);
     }
 
 

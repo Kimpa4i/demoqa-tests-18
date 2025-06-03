@@ -1,22 +1,50 @@
-package tests;
+package demoqa.tests;
 
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
+import demoqa.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static demoqa.tests.TestData.*;
 
-public class RegistrationWithPageObjectsTests extends TestBase {
+public class RegistrationWithTestDataTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
+
+//    // Подход №1 хранение тестовых данных в переменных
+//    String userName = "Alex";
+//    String lastName = "Egorov";
+//    String userEmail = "alex@gmail.com";
+
+    // Можно в Testbase хранить, но не лучший подход.
+    //  Можно создать отдельный класс
+
+    //Данные можно вывезти в beforeEach объявив сначала переменные
+
+//    String userName;
+//    String lastName;
+//    String userEmail;
+//
+//    @BeforeEach
+//    void prepareTestData() {
+//        userName = "Alex";
+//        lastName = "Egorov";
+//        userEmail = "alex@gmail.com";
+//
+//    }
+
 
     @Test
     void successfulRegistrationTest() {
-        String userName = "Alex";
+//        // Подход №1 хранение тестовых данных в переменных
+//        String userName = "Alex";
+//        String lastName = "Egorov";
+//        String email = "alex@gmail.com";
+
 
         registrationPage.openPage()
                 .setFirstName(userName)
-                .setLastName("Egorov")
-                .setEmail("alex@mail.ru")
+                .setLastName(lastName)
+                .setEmail(userEmail)
                 .setGender("Other")
                 .setPhone("9777237756")
                 .setAddress("Another address 2")
@@ -44,8 +72,8 @@ public class RegistrationWithPageObjectsTests extends TestBase {
 //        registrationPage.registrationResultsModal.verifyResult ("Student Name", userName + "Egorov"); // Если в RegistrationPage  сделать     RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal() публичным то можно напрямую обратиться  (Плохая практика);
 
         registrationPage.verifyResultsModalAppears();
-        registrationPage.verifyResult("Student Name", userName + " Egorov");
-        registrationPage.verifyResult("Student Email", "alex@mail.ru");
+        registrationPage.verifyResult("Student Name", userName + " " + lastName);
+        registrationPage.verifyResult("Student Email", userEmail);
         registrationPage.verifyResult("Gender", "Other");
         registrationPage.verifyResult("Mobile", "9777237756");
         registrationPage.verifyResult("Date of Birth", "30 July,1994");

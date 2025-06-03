@@ -1,4 +1,4 @@
-package utils;
+package demoqa.utils;
 
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;

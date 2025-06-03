@@ -1,4 +1,4 @@
-package tests;
+package demoqa.tests;
 
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Tag;
@@ -72,6 +72,4 @@ public class RegistrationWithRemoteDriverTests extends TestBaseExtended {
         });
 
     }
-
-
 }

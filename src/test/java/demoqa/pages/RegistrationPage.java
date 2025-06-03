@@ -1,10 +1,9 @@
-package pages;
+package demoqa.pages;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import pages.components.CalendarComponents;
-import pages.components.RegistrationResultsModal;
+import demoqa.pages.components.CalendarComponents;
+import demoqa.pages.components.RegistrationResultsModal;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;

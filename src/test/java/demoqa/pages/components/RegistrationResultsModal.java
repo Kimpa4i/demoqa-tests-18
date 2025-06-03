@@ -1,4 +1,4 @@
-package pages.components;
+package demoqa.pages.components;
 
 import com.codeborne.selenide.Selectors;
 
